@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/hero.svg" alt="stalebrain: provenance and decay for AI agent memory" width="760">
+  <img src="https://raw.githubusercontent.com/stalebrainlabs/stalebrain/main/assets/hero.svg" alt="stalebrain: provenance and decay for AI agent memory" width="760">
 </p>
 
 **Your AI agent's memory files are lying to it. stalebrain finds every lie, proves it with commits, and hands you the fix.**
@@ -11,7 +11,7 @@ Not a linter. A trust model: after one audit, every claim in agent memory carrie
 ## See it in action
 
 <p align="center">
-  <img src="assets/demo.svg" alt="stale-brain audit: health bar, contradicted claims with cited commits, token meter, trend" width="840">
+  <img src="https://raw.githubusercontent.com/stalebrainlabs/stalebrain/main/assets/demo.svg" alt="stale-brain audit: health bar, contradicted claims with cited commits, token meter, trend" width="840">
 </p>
 
 Verification is mechanical: glob, grep, and read-only git. No embeddings, no server, no database, no network. Nothing leaves your machine, and nothing gets executed: scripts are verified by their definition (scripts block, Makefile, CI), never by running them.
