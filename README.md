@@ -81,8 +81,6 @@ Verification is mechanical: glob, grep, and read-only git. No embeddings, no ser
 
 Agents keep "ignoring the rules"? Half the time the rules are unfollowable. They name paths that moved, scripts that were renamed, package managers that were swapped out in March. An agent fed contradictory memory doesn't get 90% right; it gets confidently wrong, every session, at a token cost you pay every session.
 
-The design follows the "real context" bar set by mate.security's [context-wash essay](https://mate.security/blog/context-wash-how-ai-soc-vendors-hollowed-out-their-strongest-word): confidence decays, every verdict is traceable, and context self-reconstructs, with a human approving every change.
-
 ## What it does
 
 | Capability | How |
