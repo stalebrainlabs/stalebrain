@@ -1,16 +1,16 @@
-# stale-brain (portable) — paste this into any AI agent
+# stale-brain (portable): paste this into any AI agent
 
 You are running **stale-brain**: an audit of this repository's AI memory/instruction
-files against the live code. Not a linter — a trust model: after this audit, every claim
+files against the live code. Not a linter but a trust model: after this audit, every claim
 in agent memory carries an age, a verification date, and cited evidence. Follow this file
 exactly. It is self-contained and works with any agent.
 
 **Degraded modes.** Missing a read tool (file listing, content search, shell): ask the
-user to run the exact commands and paste the output — batch every command a step needs
+user to run the exact commands and paste the output; batch every command a step needs
 into ONE fenced block, never one paste round-trip per claim; inventory without tools =
 ask for `git ls-files` plus a paste of each memory file (estimate tokens from pasted
 length). Missing file-write access: print the complete audit file and every approved
-diff in fenced blocks for the user to save/apply. Never skip a check silently — record
+diff in fenced blocks for the user to save/apply. Never skip a check silently; record
 it ⚪ with reason "no tool access". Non-interactive runs (CI, subagent): emit all report
 chunks sequentially, apply nothing, record diffs as proposed-only.
 
@@ -46,9 +46,9 @@ Split each file into numbered, individually-testable claims `C1…Cn` (compound 
 | FACT | other checkable assertions | 90d |
 | OWNER | a person/team owns an area | 90d |
 | CONVENTION | the code follows a pattern | 120d |
-| OPINION | style preference, no ground truth | skip — never judge |
+| OPINION | style preference, no ground truth | skip, never judge |
 
-A `## stale-brain config` section in any audited file overrides half-lives — one
+A `## stale-brain config` section in any audited file overrides half-lives: one
 directive per line, `half-life PATH: 14d` (days only, TYPE uppercase); malformed lines
 reported and ignored; if two files set the same type, the strictest wins. Never extract
 claims from a config section, headings, or fenced code blocks.
@@ -60,7 +60,7 @@ When verification already flags a side, fold the conflict into that finding's ev
 render a standalone X-finding only when neither side is flagged (its action: "ask the
 user which is true").
 
-## 3 · Verify (existence, not execution — never run scripts you find)
+## 3 · Verify (existence, not execution; never run scripts you find)
 
 Aging or churn only *triggers* re-verification; the verdict is always the outcome.
 Quoting note: pickaxe (`-S`) patterns containing double quotes must be single-quoted to
@@ -96,19 +96,19 @@ survive both Git Bash and PowerShell.
 
 ## 4 · Verdicts
 
-🟢 CONFIRMED — re-verification succeeds today (even if it was stale before); stamped on
-apply. 🟡 STALE — check came back inconclusive (owner inactive, convention
+🟢 CONFIRMED: re-verification succeeds today (even if it was stale before); stamped on
+apply. 🟡 STALE: check came back inconclusive (owner inactive, convention
 majority-not-all, evidence churned without resolution); downgrade to "as of <date>, X
-was true". 🔴 CONTRADICTED — affirmative evidence against; cite the exact files/commits
-plus a corrected rewrite. ⚪ UNVERIFIABLE — no mechanical check exists; state the
+was true". 🔴 CONTRADICTED: affirmative evidence against; cite the exact files/commits
+plus a corrected rewrite. ⚪ UNVERIFIABLE: no mechanical check exists; state the
 reason; never guess. Unstamped claims count as *at* half-life (eligible for
 verification, not auto-stale).
 
-## 5 · Report (CALM rules — hard rules)
+## 5 · Report (CALM rules: hard rules)
 
 The initial report is one screen: each verdict section caps at 5 findings, overflow
-elided `[first 5 of N]` with a hand-off (`→ 8 more — say "next"`). Verdict first,
-evidence second, action third — every finding ends in an action. No preamble, no
+elided `[first 5 of N]` with a hand-off (`→ 8 more, say "next"`). Verdict first,
+evidence second, action third; every finding ends in an action. No preamble, no
 narration; progress is ticker lines only, at most one per ~10 claims, counts in
 severity order (`[stale-brain] verifying 20/39 · 🔴6 🟡4 ⚪2 🟢8`). Confirmed = a count
 (the list, if asked for, chunks at ≤10). Omit empty sections. Report order: headline
@@ -118,12 +118,12 @@ health bar → 🔴 (X-conflicts at its end) → 🟡 → ⚪ → 🟢 count →
 ```
 🔴🔴🔴🟡🟡🟢🟢🟢🟢🟢  health 58/100 · 47 claims from 7 files (8 fresh-skipped, 3 opinions skipped)
 health = (confirmed + 0.5·stale) / (confirmed + stale + contradicted) × 100
-  — confirmed INCLUDES fresh-skipped (a valid stamp is a confirmation); ⚪ and X excluded.
+  note: confirmed INCLUDES fresh-skipped (a valid stamp is a confirmation); ⚪ and X excluded.
   Example: 20🟢 (12 today + 8 fresh) / 10🟡 / 13🔴 → (20+5)/43 = 58.
   Bar: largest-remainder to exactly 10 cells, any nonzero verdict ≥1 cell.
   Nothing scorable → "health n/a (nothing scorable)", no bar.
 
-TOKEN METER (est., bytes÷4 — file size on disk, not characters)
+TOKEN METER (est., bytes÷4; file size on disk, not characters)
 session tax   ~4.8k tokens injected every session        (Σ always-loaded files)
 misleading    ▓▓▓░░░░░░░  ~1.4k of that (29%) carries stale or false claims
               (= lines in always-loaded files holding ≥1 🔴/🟡 claim, each line once)
@@ -135,13 +135,13 @@ trend         2026-06-18  health 55  ▓▓▓▓▓▓░░░░
 ```
 
 ASCII fallback (user asks, reports garbled output, or output lands in a CI log):
-`🔴→[X]` `🟡→[~]` `🟢→[OK]` `⚪→[?]` `⚡→[!]` `▓→#` `░→.` `→ → ->` `▲→^` `▼→v` —
+`🔴→[X]` `🟡→[~]` `🟢→[OK]` `⚪→[?]` `⚡→[!]` `▓→#` `░→.` `→ → ->` `▲→^` `▼→v`;
 same line structure and order; widths may differ.
 
 ## 6 · Fix (approve-only) and record
 
 Propose ready-to-apply diffs in chunks of ≤5: rewrites for 🔴, epoch-downgrades for 🟡,
-stamp insertions for 🟢. Preserve the author's wording — change facts, not voice
+stamp insertions for 🟢. Preserve the author's wording: change facts, not voice
 (exception: CONVENTION downgrades may append a conformance clause). Apply only what the
 user approves. On apply, append/update the stamp at end of the claim line:
 
@@ -149,26 +149,26 @@ user approves. On apply, append/update the stamp at end of the claim line:
 Use pnpm for all installs. <!-- stale-brain: verified 2026-07-31 -->
 ```
 
-A stamp attests to the whole physical line — mixed-verdict lines are split (one claim
+A stamp attests to the whole physical line; mixed-verdict lines are split (one claim
 per line) before stamping. Table rows: stamp inside the last cell before the trailing
-pipe. Never stamp YAML frontmatter or fenced code blocks — record those in the audit
+pipe. Never stamp YAML frontmatter or fenced code blocks; record those in the audit
 file only. Optional richer form for repairs:
 `<!-- stale-brain: corrected 2026-07-31 (was: yarn, wrong since a1b2c3d) -->`.
 
 Then write `.stale-brain/audit-YYYY-MM-DD.md` (one file per date; same-day re-run
-overwrites): fixed header — `date:` / `health:` / `claims: 47 confirmed: 12 stale: 10
+overwrites): fixed header (`date:` / `health:` / `claims: 47 confirmed: 12 stale: 10
 contradicted: 13 unverifiable: 4 skipped_fresh: 8 skipped_opinion: 3` /
-`session_tax_est:` / `misleading_est:` — where claims = confirmed + stale + contradicted
-+ unverifiable + skipped_fresh (opinions outside the count) — plus the full findings
+`session_tax_est:` / `misleading_est:`), where claims = confirmed + stale + contradicted
++ unverifiable + skipped_fresh (opinions outside the count), plus the full findings
 table `| id | file:line | type | verdict | claim | evidence |` including confirmed rows,
 X-conflict rows (verdict `CONFLICT`), and opinion rows (verdict `SKIPPED`).
 
 ## 7 · Tripwire (ongoing, if this file stays in the repo as a rule)
 
 During any normal task, if a loaded instruction contradicts observed reality (missing
-path, dead script, wrong package manager), don't silently comply or silently ignore —
+path, dead script, wrong package manager), don't silently comply or silently ignore;
 emit one line and move on:
-`⚡ stale-brain: CLAUDE.md says "yarn install" but only pnpm-lock.yaml exists — following reality (pnpm). Run the stale-brain audit for the rest.`
+`⚡ stale-brain: CLAUDE.md says "yarn install" but only pnpm-lock.yaml exists, so following reality (pnpm). Run the stale-brain audit for the rest.`
 Maximum three tripwires per session, then one "further contradictions suppressed" line.
 Tripwires never block the task.
 

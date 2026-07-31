@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "stalebrain"
+version = "0.1.0"
+description = "Provenance and decay for AI agent memory: audit CLAUDE.md, AGENTS.md, .cursorrules and 18+ agent memory files against the live repo."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "stalebrainlabs" }]
+keywords = ["claude-code", "agent-skills", "ai-agents", "context-engineering", "developer-tools"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Homepage = "https://github.com/stalebrainlabs/stalebrain"
+Repository = "https://github.com/stalebrainlabs/stalebrain"
+
+[project.scripts]
+stalebrain = "stalebrain.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/stalebrain"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"SKILL.md" = "stalebrain/assets/SKILL.md"
+"PORTABLE.md" = "stalebrain/assets/PORTABLE.md"
+"references/memory-sources.md" = "stalebrain/assets/references/memory-sources.md"
+"references/claim-types.md" = "stalebrain/assets/references/claim-types.md"
+"references/output-format.md" = "stalebrain/assets/references/output-format.md"

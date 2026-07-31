@@ -1,4 +1,6 @@
-# stalebrain
+<p align="center">
+  <img src="assets/hero.svg" alt="stalebrain: provenance and decay for AI agent memory" width="760">
+</p>
 
 **Your AI agent's memory files are lying to it. stalebrain finds every lie, proves it with commits, and hands you the fix.**
 
@@ -8,28 +10,9 @@ Not a linter. A trust model: after one audit, every claim in agent memory carrie
 
 ## See it in action
 
-```
-[stale-brain] inventory · 7 files (4 always-loaded ~4.8k + 3 on-demand ~2.2k)
-[stale-brain] verifying 39/39 · 🔴13 🟡10 ⚪4 🟢12
-
-STALE-BRAIN AUDIT · acme-web · 2026-07-31
-🔴🔴🔴🟡🟡🟢🟢🟢🟢🟢  health 58/100 · 47 claims from 7 files (8 fresh-skipped, 3 opinions skipped)
-
-🔴 CONTRADICTED · 13 (fix these first)   [first 5 of 13]
-C7   CLAUDE.md:12   "use yarn for all installs"
-     → pnpm-lock.yaml is the only lockfile since a1b2c3d (2026-03-14); packageManager: pnpm@9
-     → fix: rewrite to pnpm
-C31  AGENTS.md:8    "run npm test before committing"
-     → no "test" script; scripts block has "test:unit" since e4f5a6b
-     → fix: rewrite to pnpm test:unit
-
-TOKEN METER  (est., bytes÷4)
-session tax   ~4.8k tokens injected every session
-misleading    ▓▓▓░░░░░░░  ~1.4k of that (29%) carries stale or false claims
-
-trend         2026-06-18  health 55  ▓▓▓▓▓▓░░░░
-              2026-07-31  health 58  ▓▓▓▓▓▓░░░░  ▲ +3
-```
+<p align="center">
+  <img src="assets/demo.svg" alt="stale-brain audit: health bar, contradicted claims with cited commits, token meter, trend" width="840">
+</p>
 
 Verification is mechanical: glob, grep, and read-only git. No embeddings, no server, no database, no network. Nothing leaves your machine, and nothing gets executed: scripts are verified by their definition (scripts block, Makefile, CI), never by running them.
 
@@ -57,7 +40,23 @@ The design follows the "real context" bar set by mate.security's [context-wash e
 
 Prerequisite: a repo with git history. That's it.
 
-**Claude Code**
+**With uv (recommended, works inside Claude Code or any CLI)**
+
+```
+uv tool install git+https://github.com/stalebrainlabs/stalebrain
+stalebrain install              # user-level: every repo, Claude Code CLI and desktop app
+stalebrain install --project .  # or just this repo
+```
+
+One-shot without installing anything permanent:
+
+```
+uvx --from git+https://github.com/stalebrainlabs/stalebrain stalebrain install
+```
+
+pipx works identically (`pipx install git+https://github.com/stalebrainlabs/stalebrain`). Once the PyPI release lands, plain `uv tool install stalebrain` will work too.
+
+**With git alone**
 
 ```
 # project-level
@@ -68,6 +67,10 @@ git clone https://github.com/stalebrainlabs/stalebrain ~/.claude/skills/stale-br
 ```
 
 Then type `/stale-brain`, or say "audit my agent memory".
+
+**Desktop / no terminal at all**
+
+`stalebrain install` covers the Claude Code desktop app (it reads the same user-level skills folder). For every other desktop chat (ChatGPT, Gemini, Claude.ai), run `stalebrain portable` to print the single-file protocol, or just copy [PORTABLE.md](PORTABLE.md) and paste it into the chat.
 
 **Any other assistant (Cursor, Copilot, Gemini CLI, ChatGPT, local models)**
 
@@ -146,6 +149,9 @@ references/
   memory-sources.md         where every agent keeps its brain
   claim-types.md            taxonomy, half-lives, verification recipes
   output-format.md          CALM rules, Pulse graphs, token meter, report + audit formats
+src/stalebrain/             the installer CLI (stalebrain install / portable / path)
+assets/                     hero and demo art
+pyproject.toml              uv / pipx / pip packaging
 ```
 
 ## Troubleshooting
@@ -164,4 +170,4 @@ references/
 
 ## License
 
-Not chosen yet; a license will be added before wide distribution. All content is original work, written from scratch.
+MIT. See [LICENSE](LICENSE). All content is original work, written from scratch.

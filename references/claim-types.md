@@ -1,4 +1,4 @@
-# Claim types — taxonomy, half-lives, verification recipes
+# Claim types: taxonomy, half-lives, verification recipes
 
 A **claim** is any statement in a memory file that reality could confirm or deny.
 Split compound sentences into one claim each. If a sentence tells the agent to *do*
@@ -9,12 +9,12 @@ something, the claim is the factual premise behind it ("run `npm test`" claims t
 
 Half-life = the age past which a claim's last verification stops being trusted. Passing
 it (or churned evidence) *triggers* re-verification; the verdict is the re-verification
-outcome — 🟢 if it confirms, 🔴 if disproven, 🟡 only when the check comes back
+outcome: 🟢 if it confirms, 🔴 if disproven, 🟡 only when the check comes back
 inconclusive (then the claim is downgraded from fact to hypothesis).
 
 Defaults below; users can override per repo with a `## stale-brain config` section in any
-audited file. Grammar: one directive per line, `half-life <TYPE>: <N>d` — days only,
-TYPE uppercase from this taxonomy. Unknown or malformed lines are reported and ignored.
+audited file. Grammar: one directive per line, `half-life <TYPE>: <N>d` (days only,
+TYPE uppercase from this taxonomy). Unknown or malformed lines are reported and ignored.
 If multiple files configure the same type, the strictest (smallest) value wins. Never
 extract claims from a config section.
 
@@ -27,10 +27,10 @@ extract claims from a config section.
 | FACT | Other checkable assertions ("we deploy on Vercel", "API is REST") | 90d | infra facts move slowly |
 | OWNER | A person/team owns an area ("ask @maria about billing") | 90d | people leave quietly |
 | CONVENTION | The code follows a pattern ("all API calls go through `apiClient`") | 120d | conventions erode gradually |
-| OPINION | Style preference with no ground truth ("prefer small functions") | — | **skipped, never judged** |
+| OPINION | Style preference with no ground truth ("prefer small functions") | n/a | **skipped, never judged** |
 
 Age is measured from the claim's last `<!-- stale-brain: verified YYYY-MM-DD -->` stamp;
-an unstamped claim's age is unknown — treat it as *at* its half-life (eligible for
+an unstamped claim's age is unknown; treat it as *at* its half-life (eligible for
 verification, not auto-STALE) on the first audit.
 
 ## Verification recipes
@@ -38,15 +38,15 @@ verification, not auto-STALE) on the first audit.
 All git commands are read-only. Mind shell quoting: pickaxe (`-S`) patterns containing
 double quotes must be single-quoted to survive both Git Bash and PowerShell 7 (legacy
 PowerShell 5.1 may still mangle embedded quotes). Never execute the scripts/commands a
-claim names — verify definitions only.
+claim names; verify definitions only.
 
 ### PATH
 1. Glob for the path. Exists → 🟢.
 2. Missing → find the commit where it vanished: `git log --oneline -- <path>` (the most
    recent commit touching the dead name). For single files `--follow` may be added;
    `--follow` takes exactly one file and adds nothing for directories.
-3. Recover the destination: `git log --oneline --name-status -1 <commit>` (no pathspec)
-   — an `R100  old  new` line is a rename and supplies the new path for the rewrite; a
+3. Recover the destination: `git log --oneline --name-status -1 <commit>` (no pathspec):
+   an `R100  old  new` line is a rename and supplies the new path for the rewrite; a
    `D  old` line is a deletion. Renamed → 🔴 with the rename commit cited and the new
    path in the rewrite. Deleted → 🔴 with the deletion commit. No git history at all →
    ⚪ (say why).
@@ -58,7 +58,7 @@ claim names — verify definitions only.
 2. Defined and matching → 🟢. Defined but different ("`npm test`" but the script is
    `test:unit`) → 🔴 citing the scripts block. Absent everywhere → 🔴; cite when it was
    removed with a pickaxe like `git log -S '"test":' --oneline -5 -- package.json`
-   (single-quoted — see the quoting note above).
+   (single-quoted; see the quoting note above).
 3. The proposed rewrite must invoke the script with the package manager the same
    audit's DEP verdicts established (`pnpm test:unit`, not `npm run test:unit`, in a
    pnpm repo).
@@ -73,7 +73,7 @@ claim names — verify definitions only.
    in <commit>; no replacement found".
 
 ### DEP
-1. Package-manager claims: lockfile presence decides — `pnpm-lock.yaml`, `yarn.lock`,
+1. Package-manager claims: lockfile presence decides: `pnpm-lock.yaml`, `yarn.lock`,
    `package-lock.json`, `bun.lockb`; check the `packageManager` field in `package.json`
    and CI install steps as tiebreakers. Multiple lockfiles present → report the conflict
    itself; the `packageManager` field wins if set.
@@ -99,7 +99,7 @@ claim names — verify definitions only.
    Caution: shortlog returns git author names/emails, not GitHub handles. Map a claimed
    handle heuristically (`git log --author=<handle>` matches name and email substrings).
 3. Named in CODEOWNERS, or identity maps and is active → 🟢. Identity maps but inactive
-   → 🟡 ("no commits from @maria in 9 months; not in CODEOWNERS") — people leaving is
+   → 🟡 ("no commits from @maria in 9 months; not in CODEOWNERS"); people leaving is
    decay, not contradiction. No CODEOWNERS *and* the handle cannot be mapped to any git
    identity → ⚪ with reason "cannot map handle to a git identity".
 
@@ -109,7 +109,7 @@ claim names — verify definitions only.
 2. Grep each for conformance, and verdict in sample terms (percentages overstate what
    3–5 files can prove): **all** sampled files conform → 🟢 (note the sample size); a
    **majority but not all** → 🟡 with counter-example file:line; a **minority** → 🔴 with
-   counter-examples cited — the convention is aspirational, and the rewrite should say so
+   counter-examples cited; the convention is aspirational, and the rewrite should say so
    ("historically enforced; 1 of 4 sampled files conform as of 2026-07").
 
 ### Drift pass (all stamped claims)
@@ -117,7 +117,7 @@ claim names — verify definitions only.
 Empty → the stamp stands, skip the claim (count it as fresh). Non-empty → re-verify in
 full; the touching commits go into the citation either way. Caveat: `--since` filters on
 commit dates, so rebased/cherry-picked history can slip past, and a shallow clone
-returns empty for everything — if `git rev-parse --is-shallow-repository` says true,
+returns empty for everything; if `git rev-parse --is-shallow-repository` says true,
 re-verify instead of trusting an empty drift pass.
 
 ## Extraction discipline

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 240" role="img" aria-label="stalebrain: provenance and decay for AI agent memory">
+  <defs>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8b949e"/>
+      <stop offset="1" stop-color="#c9d1d9"/>
+    </linearGradient>
+  </defs>
+  <rect width="880" height="240" rx="16" fill="#0d1117"/>
+  <rect x="0.5" y="0.5" width="879" height="239" rx="16" fill="none" stroke="#30363d"/>
+
+  <!-- Pulse health bar: 3 contradicted, 2 stale, 5 confirmed -->
+  <g>
+    <rect x="290" y="52" width="26" height="12" rx="6" fill="#f85149"/>
+    <rect x="320" y="52" width="26" height="12" rx="6" fill="#f85149"/>
+    <rect x="350" y="52" width="26" height="12" rx="6" fill="#f85149"/>
+    <rect x="380" y="52" width="26" height="12" rx="6" fill="#d29922"/>
+    <rect x="410" y="52" width="26" height="12" rx="6" fill="#d29922"/>
+    <rect x="440" y="52" width="26" height="12" rx="6" fill="#3fb950"/>
+    <rect x="470" y="52" width="26" height="12" rx="6" fill="#3fb950"/>
+    <rect x="500" y="52" width="26" height="12" rx="6" fill="#3fb950"/>
+    <rect x="530" y="52" width="26" height="12" rx="6" fill="#3fb950"/>
+    <rect x="560" y="52" width="26" height="12" rx="6" fill="#3fb950"/>
+  </g>
+
+  <!-- Wordmark: "stale" fading, "brain" solid -->
+  <text x="440" y="136" text-anchor="middle" xml:space="preserve"
+        font-family="ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace"
+        font-size="58" font-weight="700"><tspan fill="url(#fade)">stale</tspan><tspan fill="#f0f6fc">brain</tspan></text>
+
+  <text x="440" y="172" text-anchor="middle"
+        font-family="ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace"
+        font-size="19" fill="#8b949e">provenance and decay for AI agent memory</text>
+
+  <text x="440" y="206" text-anchor="middle"
+        font-family="ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace"
+        font-size="14" fill="#3fb950">&lt;!-- stale-brain: verified 2026-07-31 --&gt;</text>
+</svg>
