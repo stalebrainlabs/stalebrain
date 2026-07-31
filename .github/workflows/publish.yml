@@ -11,11 +11,18 @@ jobs:
     environment: pypi
     permissions:
       id-token: write   # OIDC: GitHub mints a short-lived token that PyPI trusts
-      contents: read
+      contents: write   # create the GitHub Release for the tag
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: false
       - name: Build sdist and wheel
         run: uv build
       - name: Publish to PyPI (trusted publishing, no stored secrets)
         run: uv publish --trusted-publishing always
+      - name: Publish GitHub Release (marked latest)
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/* --verify-tag --latest --generate-notes
