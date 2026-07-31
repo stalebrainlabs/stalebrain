@@ -122,6 +122,9 @@ CALM output (chunked, actionable, low-noise, meaningful) with Pulse graphs and t
 meter. Non-negotiables: headline verdict first, CONTRADICTED before everything else,
 maximum 5 findings per chunk with an explicit "show next" hand-off, confirmed claims
 collapsed to a count, and every finding readable as a single line before its detail.
+Evidence lines carry `(direct)`/`(inferred)` provenance tags, and the report answers the
+keywords `why <id>` (evidence chain), `brief`/`full` (intensity), and `files` (per-file
+strips), all specified in output-format.md.
 
 ### 6. FIX (approve-only)
 
@@ -141,6 +144,12 @@ A stamp attests to the **entire physical line**; apply it only when every claim 
 line is confirmed; otherwise the fix first splits the line, one claim per line. Full
 stamp rules (table rows, frontmatter, the optional `corrected` form) are in
 [references/output-format.md](references/output-format.md).
+
+Two more fix rules from output-format.md: safety-load-bearing lines (secrets, auth,
+validation, security, accessibility) are never proposed as deletions, only rewrites,
+marked `(safety: rewrite only)`; and after the final applied chunk print the one-line
+GAIN summary (health, misleading, recovered before → after), never when nothing was
+approved.
 
 ### 7. RECORD
 

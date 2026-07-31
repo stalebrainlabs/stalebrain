@@ -128,10 +128,10 @@ Four verdicts. Every claim lands in exactly one:
 
 Health = (confirmed + 0.5 × stale) / (confirmed + stale + contradicted) × 100. A valid stamp counts as a confirmation; unverifiable claims are excluded because not knowing is not the same as being wrong.
 
-The output system is a feature, not a byproduct. Reports follow CALM rules (chunked to 5 findings per block, verdict first, zero narration) rendered with Pulse graph primitives: a live tail that streams audit progress, and terminal graphs for health, token cost, and trend. All of it is plain Unicode with a complete ASCII fallback, built from scratch, zero dependencies. Full spec in [references/output-format.md](references/output-format.md). Each audit is recorded in `.stale-brain/audit-YYYY-MM-DD.md`, which feeds the trend graph on the next run.
+The output system is a feature, not a byproduct. Reports follow CALM rules (chunked to 5 findings per block, verdict first, zero narration) rendered with Pulse graph primitives: an append-only ticker that streams audit progress one line at a time, and terminal graphs for health, token cost, and trend. Every evidence line carries a `(direct)` or `(inferred)` provenance tag; `why C7` reprints any finding as its full evidence chain; `brief` collapses the report to 10 lines; `files` shows per-file health strips; a `decay` line names the next half-life expiry; and applied fixes end in a one-line `GAIN` summary (health, misleading tokens, and recovered tokens, before → after). All of it is plain Unicode with a complete ASCII fallback, built from scratch, zero dependencies. Full spec in [references/output-format.md](references/output-format.md). Each audit is recorded in `.stale-brain/audit-YYYY-MM-DD.md`, which feeds the trend graph on the next run.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/stalebrainlabs/stalebrain/main/assets/pulse.svg?v=2" alt="Pulse: the live tail, the graphs, the trend" width="840">
+  <img src="https://raw.githubusercontent.com/stalebrainlabs/stalebrain/main/assets/pulse.svg?v=3" alt="Pulse: the ticker, the graphs, the trend" width="840">
 </p>
 
 ## How it compares
@@ -144,7 +144,7 @@ Feature checks verified 2026-07-31 against each project's published docs and sou
 | 13 agents' memory files (18+ locations) | ✓ | ~ (2) | ~ (3) | ~ (3) | ~ | ✗ (MEMORY.md) |
 | Runs on any model, zero install (pure markdown) | ✓ | ~ (skill + CLI/MCP) | ✗ (CLI/MCP) | ✗ (CLI) | ✗ (CLI) | ~ (skill) |
 | Extracts prose into typed claims (7 types, half-life each) | ✓ | ✗ | ✗ | ✗ | ✗ | ✗ |
-| Provenance stamps, incremental audits | ✓ | ✗ | ✗ | ✗ (README disclaims timestamps) | ✗ | ✗ |
+| Provenance stamps, incremental audits | ✓ | ✗ | ✗ | ✗ | ✗ | ✗ |
 | Half-life confidence decay | ✓ | ✗ | ~ (staleness checks) | ~ (freshness grades) | ~ (freshness check) | ~ (age-based) |
 | Contradictions cite specific commits | ✓ | ✗ | ~ (git-history fixes) | ✗ | ✗ | ✗ |
 | Owner verification (CODEOWNERS + git shortlog) | ✓ | ✗ | ✗ | ✗ | ✗ | ✗ |

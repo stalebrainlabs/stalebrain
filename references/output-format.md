@@ -117,6 +117,74 @@ recoverable   ~0.6k deletable by the proposed fixes
 on-demand     ~2.2k more across 3 scoped rule files (not in tax; ~0.2k misleading there)
 ```
 
+## Report semantics
+
+**Evidence provenance tag.** Every 🔴/🟡/🟢 finding's evidence line ends in a provenance
+tag: `(direct)` when the verdict rests on the current state of the repo as read this
+audit (a lockfile present, a scripts block, a CODEOWNERS entry, a path that exists), or
+`(inferred)` when the verdict had to be reconstructed or sampled (git archaeology for a
+vanished path, a 3-of-5 convention sample, mapping an @handle to a git identity). A
+finding whose evidence mixes both is tagged by its weakest link: `(inferred)`. The tag
+also appears in the audit file's evidence column.
+
+**Report intensity: `brief` / `full`.** Two intensities, keyword-switched; `full` (the
+template below) is the default. Saying "brief" reprints the current report in brief form
+and keeps subsequent reports brief until "full". Brief is at most 10 lines, fixed shape:
+the headline health-bar line; the single worst 🔴 finding in its normal 3-line form (the
+one the fix flow would show first); one rollup line for everything else
+(`+ 12 more 🔴 · 10 🟡 · 4 ⚪ · 20 🟢`); the misleading token-meter line; the NEXT line.
+
+**`why <id>`: the evidence chain.** A hand-off keyword alongside "next"/"fixes":
+`why C7` reprints one finding as its full chain, at most 10 lines. Replay only: it
+reprints evidence gathered during the audit and runs nothing new.
+
+```
+why C7
+C7   CLAUDE.md:12   "use yarn for all installs"   🔴 CONTRADICTED
+     check  lockfiles present?       ↳ pnpm-lock.yaml is the only lockfile (direct)
+     check  packageManager field?    ↳ "pnpm@9" in package.json (direct)
+     check  since when?              ↳ a1b2c3d (2026-03-14) deleted yarn.lock (inferred)
+     rule   DEP: lockfile presence decides; packageManager field tiebreaks
+     action rewrite to pnpm
+```
+
+**`files`: per-file health strips** (on request only). One line per audited file,
+always-loaded first, each with a 5-cell verdict mini-bar (largest-remainder over that
+file's scored claims, same fill order, rounding, and nonzero-gets-a-cell rules as the
+health bar), counts in severity order, and the file's est. tokens:
+
+```
+files
+CLAUDE.md        🔴🔴🟡🟢🟢   6🔴 4🟡 1⚪ 8🟢   ~2.1k est.
+AGENTS.md        🔴🔴🟡🟢🟢   4🔴 3🟡 1⚪ 5🟢   ~1.4k est.
+.cursorrules     🔴🟡🟢🟢🟢   3🔴 3🟡 2⚪ 7🟢   ~1.3k est.
+⋮
+```
+
+**Decay horizon.** One `decay` line under the trend block (or in its position on a first
+audit), naming the earliest upcoming half-life expiry among claims stamped today or
+still fresh: `decay  earliest expiry 2026-08-30 (3 PATH claims) · re-audit before then`.
+Computed from stamp dates plus per-type half-lives; unstamped claims are already at
+half-life and never appear here. Omit the line when nothing is stamped.
+
+**Safety carve-out.** Lines whose instruction is safety-load-bearing (secrets and
+credential handling, auth, input validation, security review steps, accessibility
+requirements) are never counted in `recoverable` and never proposed as deletions, only
+as rewrites, even when contradicted or fully dead. Such findings' action lines carry the
+marker `(safety: rewrite only)`, and when any exclusions exist the recoverable meter
+line appends `(safety-excluded: ~N tokens)`.
+
+**Gain line.** Printed exactly once, immediately after fixes are applied; never when
+zero fixes were approved. One line, before → after on the three headline numbers:
+
+```
+GAIN  health 58 → 79 · misleading ~1.4k → ~0.3k · recovered ~0.6k tokens/session
+```
+
+Post-fix health recounts every applied rewrite, downgrade, and stamp as 🟢 confirmed;
+declined fixes keep their audit verdict; ⚪ and X stay excluded. Misleading is recomputed
+over the rewritten lines; recovered = est. tokens actually deleted.
+
 ## The report template
 
 Assembled in this exact order (CALM: worst first, detail on request). Empty verdict
@@ -129,10 +197,10 @@ STALE-BRAIN AUDIT · acme-web · 2026-07-31
 
 🔴 CONTRADICTED · 13 (fix these first)   [first 5 of 13]
 C7   CLAUDE.md:12   "use yarn for all installs"
-     → pnpm-lock.yaml is the only lockfile since a1b2c3d (2026-03-14); packageManager: pnpm@9
+     → pnpm-lock.yaml is the only lockfile since a1b2c3d (2026-03-14); packageManager: pnpm@9 (direct)
      → fix: rewrite to pnpm
 C31  AGENTS.md:8    "run npm test before committing"
-     → no "test" script; scripts block has "test:unit" since e4f5a6b
+     → no "test" script; scripts block has "test:unit" since e4f5a6b (direct)
      → fix: rewrite to pnpm test:unit
 ⋮
 X1   CLAUDE.md:22 ↔ AGENTS.md:9   deploy target asserted as Vercel AND Netlify
@@ -141,9 +209,9 @@ X1   CLAUDE.md:22 ↔ AGENTS.md:9   deploy target asserted as Vercel AND Netlify
 → 8 more contradicted, say "next" to continue or "fixes" to jump to the diffs.
 
 🟡 STALE · 10   [first 5 of 10]
-C3   CLAUDE.md:9    "ask @maria about billing"  · no commits from @maria in 9 months; not in CODEOWNERS
+C3   CLAUDE.md:9    "ask @maria about billing"  · no commits from @maria in 9 months; not in CODEOWNERS (inferred)
      → fix: downgrade to "as of 2026-02, @maria owned billing" or name the current owner
-C19  AGENTS.md:14   "error handling uses the Result type"  · 3 of 5 sampled files conform
+C19  AGENTS.md:14   "error handling uses the Result type"  · 3 of 5 sampled files conform (inferred)
      → fix: append conformance clause
 ⋮
 
@@ -159,14 +227,16 @@ misleading    ▓▓▓░░░░░░░  ~1.4k of that (29%) carries stale 
 
 trend         2026-06-18  health 55  ▓▓▓▓▓▓░░░░
               2026-07-31  health 58  ▓▓▓▓▓▓░░░░  ▲ +3
+decay         earliest expiry 2026-08-30 (3 PATH claims) · re-audit before then
 
-→ NEXT: "fixes" to review diffs (13 rewrites, 10 downgrades, 12 stamps) · "confirmed" to list 🟢 · "report" for the full table
+→ NEXT: "fixes" (13 rewrites, 10 downgrades, 12 stamps) · "why C7" evidence chain · "brief" · "files" · "confirmed" · "report"
 ```
 
 The fix flow then presents diffs in chunks of ≤5, each diff preceded by its claim line,
-each chunk ending with the approve hand-off. Nothing is applied without a yes. In
-non-interactive runs (no human to answer): emit all chunks sequentially, apply nothing,
-and record the diffs in the audit file as proposed-only.
+each chunk ending with the approve hand-off. Nothing is applied without a yes. After the
+final applied chunk, print the GAIN line (see Report semantics); skip it if nothing was
+approved. In non-interactive runs (no human to answer): emit all chunks sequentially,
+apply nothing, record the diffs in the audit file as proposed-only, and print no GAIN.
 
 ## The audit file
 

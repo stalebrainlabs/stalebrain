@@ -134,6 +134,27 @@ trend         2026-06-18  health 55  ▓▓▓▓▓▓░░░░
               2026-07-31  health 58  ▓▓▓▓▓▓░░░░  ▲ +3
 ```
 
+Report semantics, all keyword-driven:
+- **Provenance tags**: every 🔴/🟡/🟢 evidence line ends `(direct)` (verdict read from
+  the repo's current state) or `(inferred)` (reconstructed via git archaeology, sampling,
+  or identity mapping); mixed evidence takes `(inferred)`.
+- **`why <id>`**: reprint one finding as its evidence chain, ≤10 lines (claim + verdict,
+  each `check` with its `↳ observed` result and tag, the `rule` that fired, the
+  `action`). Replay only; run nothing new.
+- **`brief` / `full`**: brief = ≤10 lines (headline bar, worst 🔴 finding, one rollup
+  line for the rest, misleading meter line, NEXT line); sticky until "full".
+- **`files`**: per-file strips, always-loaded first: 5-cell verdict mini-bar (same
+  rounding rules as the health bar), counts in severity order, est. tokens.
+- **Decay horizon**: one `decay` line under trend naming the earliest upcoming
+  half-life expiry among stamped claims (`decay  earliest expiry 2026-08-30 (3 PATH
+  claims) · re-audit before then`); omit when nothing is stamped.
+- **Safety carve-out**: safety-load-bearing lines (secrets, auth, validation, security,
+  accessibility) are never counted recoverable and never proposed as deletions, only
+  rewrites; mark their actions `(safety: rewrite only)`.
+- **GAIN line**: once, only after ≥1 fix is applied:
+  `GAIN  health 58 → 79 · misleading ~1.4k → ~0.3k · recovered ~0.6k tokens/session`
+  (applied fixes recount as 🟢; declined keep their verdict; never in non-interactive runs).
+
 ASCII fallback (user asks, reports garbled output, or output lands in a CI log):
 `🔴→[X]` `🟡→[~]` `🟢→[OK]` `⚪→[?]` `⚡→[!]` `▓→#` `░→.` `→ → ->` `▲→^` `▼→v`;
 same line structure and order; widths may differ.

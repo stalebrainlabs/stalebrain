@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "stalebrain"
-version = "0.1.2"
+version = "0.1.3"
 description = "Provenance and decay for AI agent memory: audit CLAUDE.md, AGENTS.md, .cursorrules and 18+ agent memory files against the live repo."
 readme = "README.md"
 requires-python = ">=3.9"

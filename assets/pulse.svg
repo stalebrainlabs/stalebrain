@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 440" role="img" aria-label="Pulse: the live tail, the graphs, the trend">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 440" role="img" aria-label="Pulse: the ticker, the graphs, the trend">
   <rect width="880" height="440" rx="16" fill="#F8F1E3"/>
 
   <g font-family="'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#E63A0C" letter-spacing="2.5">
-    <text x="32" y="44">THE LIVE TAIL</text>
+    <text x="32" y="44">THE TICKER</text>
     <text x="32" y="168">THE GRAPHS</text>
     <text x="32" y="292">THE TREND</text>
   </g>
