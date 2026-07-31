@@ -40,10 +40,10 @@ The design follows the "real context" bar set by mate.security's [context-wash e
 
 Prerequisite: a repo with git history. That's it.
 
-**With uv (recommended, works inside Claude Code or any CLI)**
+**With uv or pip (recommended, works inside Claude Code or any CLI)**
 
 ```
-uv tool install git+https://github.com/stalebrainlabs/stalebrain
+uv tool install stalebrain      # or: pip install stalebrain / pipx install stalebrain
 stalebrain install              # user-level: every repo, Claude Code CLI and desktop app
 stalebrain install --project .  # or just this repo
 ```
@@ -51,10 +51,8 @@ stalebrain install --project .  # or just this repo
 One-shot without installing anything permanent:
 
 ```
-uvx --from git+https://github.com/stalebrainlabs/stalebrain stalebrain install
+uvx stalebrain install
 ```
-
-pipx works identically (`pipx install git+https://github.com/stalebrainlabs/stalebrain`). Once the PyPI release lands, plain `uv tool install stalebrain` will work too.
 
 **With git alone**
 
