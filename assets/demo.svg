@@ -1,38 +1,38 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 656" role="img" aria-label="stale-brain audit terminal demo">
-  <rect width="880" height="656" rx="12" fill="#0d1117"/>
-  <rect x="0.5" y="0.5" width="879" height="655" rx="12" fill="none" stroke="#30363d"/>
-  <path d="M0 12 A12 12 0 0 1 12 0 H868 A12 12 0 0 1 880 12 V40 H0 Z" fill="#161b22"/>
-  <circle cx="26" cy="20" r="6" fill="#ff5f56"/>
-  <circle cx="46" cy="20" r="6" fill="#ffbd2e"/>
-  <circle cx="66" cy="20" r="6" fill="#27c93f"/>
-  <text x="440" y="25" text-anchor="middle" font-family="ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#8b949e">stale-brain · audit · acme-web</text>
+  <rect width="880" height="656" rx="12" fill="#F8F1E3"/>
+  <rect x="0.5" y="0.5" width="879" height="655" rx="12" fill="none" stroke="#E0D5C0"/>
+  <path d="M0 12 A12 12 0 0 1 12 0 H868 A12 12 0 0 1 880 12 V40 H0 Z" fill="#E63A0C"/>
+  <circle cx="26" cy="20" r="6" fill="#F8F1E3"/>
+  <circle cx="46" cy="20" r="6" fill="#F8F1E3" opacity="0.65"/>
+  <circle cx="66" cy="20" r="6" fill="#F8F1E3" opacity="0.4"/>
+  <text x="440" y="25" text-anchor="middle" font-family="ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#F8F1E3">stale-brain · audit · acme-web</text>
 
   <g font-family="ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace" font-size="14" xml:space="preserve">
-    <text x="24" y="72"><tspan fill="#58a6ff">[stale-brain]</tspan><tspan fill="#8b949e"> inventory · 7 files (4 always-loaded ~4.8k + 3 on-demand ~2.2k)</tspan></text>
-    <text x="24" y="94"><tspan fill="#58a6ff">[stale-brain]</tspan><tspan fill="#8b949e"> verifying 39/39 · </tspan><tspan fill="#f85149">&#9679;13</tspan><tspan fill="#8b949e"> </tspan><tspan fill="#d29922">&#9679;10</tspan><tspan fill="#8b949e"> </tspan><tspan fill="#6e7681">&#9679;4</tspan><tspan fill="#8b949e"> </tspan><tspan fill="#3fb950">&#9679;12</tspan></text>
+    <text x="24" y="72"><tspan fill="#E63A0C">[stale-brain]</tspan><tspan fill="#5C5142"> inventory · 7 files (4 always-loaded ~4.8k + 3 on-demand ~2.2k)</tspan></text>
+    <text x="24" y="94"><tspan fill="#E63A0C">[stale-brain]</tspan><tspan fill="#5C5142"> verifying 39/39 · </tspan><tspan fill="#C42B08">&#9679;13</tspan><tspan fill="#5C5142"> </tspan><tspan fill="#D9930D">&#9679;10</tspan><tspan fill="#5C5142"> </tspan><tspan fill="#A79B87">&#9679;4</tspan><tspan fill="#5C5142"> </tspan><tspan fill="#2F9E44">&#9679;12</tspan></text>
 
-    <text x="24" y="138" font-weight="700" fill="#f0f6fc">STALE-BRAIN AUDIT · acme-web · 2026-07-31</text>
-    <text x="24" y="160"><tspan fill="#f85149">&#9679;&#9679;&#9679;</tspan><tspan fill="#d29922">&#9679;&#9679;</tspan><tspan fill="#3fb950">&#9679;&#9679;&#9679;&#9679;&#9679;</tspan><tspan fill="#f0f6fc">  health 58/100</tspan><tspan fill="#8b949e"> · 47 claims from 7 files (8 fresh-skipped, 3 opinions skipped)</tspan></text>
+    <text x="24" y="138" font-weight="700" fill="#33291F">STALE-BRAIN AUDIT · acme-web · 2026-07-31</text>
+    <text x="24" y="160"><tspan fill="#C42B08">&#9679;&#9679;&#9679;</tspan><tspan fill="#D9930D">&#9679;&#9679;</tspan><tspan fill="#2F9E44">&#9679;&#9679;&#9679;&#9679;&#9679;</tspan><tspan fill="#33291F">  health 58/100</tspan><tspan fill="#5C5142"> · 47 claims from 7 files (8 fresh-skipped, 3 opinions skipped)</tspan></text>
 
-    <text x="24" y="204"><tspan fill="#f85149">&#9679; CONTRADICTED · 13 (fix these first)</tspan><tspan fill="#6e7681">   [first 5 of 13]</tspan></text>
-    <text x="24" y="226"><tspan fill="#6e7681">C7   </tspan><tspan fill="#c9d1d9">CLAUDE.md:12   "use yarn for all installs"</tspan></text>
-    <text x="24" y="248"><tspan fill="#8b949e">     &#8594; pnpm-lock.yaml is the only lockfile since a1b2c3d (2026-03-14); packageManager: pnpm@9</tspan></text>
-    <text x="24" y="270"><tspan fill="#3fb950">     &#8594; fix: rewrite to pnpm</tspan></text>
-    <text x="24" y="292"><tspan fill="#6e7681">C31  </tspan><tspan fill="#c9d1d9">AGENTS.md:8    "run npm test before committing"</tspan></text>
-    <text x="24" y="314"><tspan fill="#8b949e">     &#8594; no "test" script; scripts block has "test:unit" since e4f5a6b</tspan></text>
-    <text x="24" y="336"><tspan fill="#3fb950">     &#8594; fix: rewrite to pnpm test:unit</tspan></text>
+    <text x="24" y="204"><tspan fill="#C42B08">&#9679; CONTRADICTED · 13 (fix these first)</tspan><tspan fill="#A79B87">   [first 5 of 13]</tspan></text>
+    <text x="24" y="226"><tspan fill="#A79B87">C7   </tspan><tspan fill="#33291F">CLAUDE.md:12   "use yarn for all installs"</tspan></text>
+    <text x="24" y="248"><tspan fill="#5C5142">     &#8594; pnpm-lock.yaml is the only lockfile since a1b2c3d (2026-03-14); packageManager: pnpm@9</tspan></text>
+    <text x="24" y="270"><tspan fill="#2F9E44">     &#8594; fix: rewrite to pnpm</tspan></text>
+    <text x="24" y="292"><tspan fill="#A79B87">C31  </tspan><tspan fill="#33291F">AGENTS.md:8    "run npm test before committing"</tspan></text>
+    <text x="24" y="314"><tspan fill="#5C5142">     &#8594; no "test" script; scripts block has "test:unit" since e4f5a6b</tspan></text>
+    <text x="24" y="336"><tspan fill="#2F9E44">     &#8594; fix: rewrite to pnpm test:unit</tspan></text>
 
-    <text x="24" y="380"><tspan fill="#d29922">&#9679; STALE · 10</tspan><tspan fill="#6e7681">   [first 5 of 10]</tspan></text>
-    <text x="24" y="402"><tspan fill="#6e7681">C3   </tspan><tspan fill="#c9d1d9">CLAUDE.md:9    "ask @maria about billing"</tspan><tspan fill="#8b949e"> · no commits in 9 months; not in CODEOWNERS</tspan></text>
-    <text x="24" y="424"><tspan fill="#3fb950">     &#8594; fix: downgrade to "as of 2026-02, @maria owned billing"</tspan></text>
+    <text x="24" y="380"><tspan fill="#D9930D">&#9679; STALE · 10</tspan><tspan fill="#A79B87">   [first 5 of 10]</tspan></text>
+    <text x="24" y="402"><tspan fill="#A79B87">C3   </tspan><tspan fill="#33291F">CLAUDE.md:9    "ask @maria about billing"</tspan><tspan fill="#5C5142"> · no commits in 9 months; not in CODEOWNERS</tspan></text>
+    <text x="24" y="424"><tspan fill="#2F9E44">     &#8594; fix: downgrade to "as of 2026-02, @maria owned billing"</tspan></text>
 
-    <text x="24" y="468" font-weight="700" fill="#f0f6fc">TOKEN METER  <tspan font-weight="400" fill="#8b949e">(est., bytes&#247;4)</tspan></text>
-    <text x="24" y="490"><tspan fill="#8b949e">session tax   ~4.8k tokens injected every session</tspan></text>
-    <text x="24" y="512"><tspan fill="#8b949e">misleading    </tspan><tspan fill="#d29922">&#9619;&#9619;&#9619;</tspan><tspan fill="#30363d">&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;</tspan><tspan fill="#c9d1d9">  ~1.4k of that (29%) carries stale or false claims</tspan></text>
+    <text x="24" y="468" font-weight="700" fill="#33291F">TOKEN METER  <tspan font-weight="400" fill="#5C5142">(est., bytes&#247;4)</tspan></text>
+    <text x="24" y="490"><tspan fill="#5C5142">session tax   ~4.8k tokens injected every session</tspan></text>
+    <text x="24" y="512"><tspan fill="#5C5142">misleading    </tspan><tspan fill="#D9930D">&#9619;&#9619;&#9619;</tspan><tspan fill="#CBBFA9">&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;</tspan><tspan fill="#33291F">  ~1.4k of that (29%) carries stale or false claims</tspan></text>
 
-    <text x="24" y="556"><tspan fill="#8b949e">trend         2026-06-18  health 55  </tspan><tspan fill="#3fb950">&#9619;&#9619;&#9619;&#9619;&#9619;&#9619;</tspan><tspan fill="#30363d">&#9617;&#9617;&#9617;&#9617;</tspan></text>
-    <text x="24" y="578"><tspan fill="#8b949e">              2026-07-31  health 58  </tspan><tspan fill="#3fb950">&#9619;&#9619;&#9619;&#9619;&#9619;&#9619;</tspan><tspan fill="#30363d">&#9617;&#9617;&#9617;&#9617;</tspan><tspan fill="#3fb950">  &#9650; +3</tspan></text>
+    <text x="24" y="556"><tspan fill="#5C5142">trend         2026-06-18  health 55  </tspan><tspan fill="#2F9E44">&#9619;&#9619;&#9619;&#9619;&#9619;&#9619;</tspan><tspan fill="#CBBFA9">&#9617;&#9617;&#9617;&#9617;</tspan></text>
+    <text x="24" y="578"><tspan fill="#5C5142">              2026-07-31  health 58  </tspan><tspan fill="#2F9E44">&#9619;&#9619;&#9619;&#9619;&#9619;&#9619;</tspan><tspan fill="#CBBFA9">&#9617;&#9617;&#9617;&#9617;</tspan><tspan fill="#2F9E44">  &#9650; +3</tspan></text>
 
-    <text x="24" y="622"><tspan fill="#f0f6fc">&#8594; NEXT: </tspan><tspan fill="#8b949e">"fixes" to review diffs (13 rewrites, 10 downgrades, 12 stamps) · "confirmed" to list · "report" for the full table</tspan></text>
+    <text x="24" y="622"><tspan fill="#33291F">&#8594; NEXT: </tspan><tspan fill="#5C5142">"fixes" to review diffs (13 rewrites, 10 downgrades, 12 stamps) · "confirmed" to list · "report" for the full table</tspan></text>
   </g>
 </svg>
