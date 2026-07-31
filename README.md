@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/stalebrainlabs/stalebrain/main/assets/hero.svg" alt="stalebrain: provenance and decay for AI agent memory" width="760">
+  <img src="https://raw.githubusercontent.com/stalebrainlabs/stalebrain/main/assets/hero.svg?v=2" alt="stalebrain: provenance and decay for AI agent memory" width="760">
 </p>
 
 **Your AI agent's memory files are lying to it. stalebrain finds every lie, proves it with commits, and hands you the fix.**
@@ -72,7 +72,7 @@ If an instruction in this file contradicts observed reality, say so in one line 
 ## See it in action
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/stalebrainlabs/stalebrain/main/assets/demo.svg" alt="stale-brain audit: health bar, contradicted claims with cited commits, token meter, trend" width="840">
+  <img src="https://raw.githubusercontent.com/stalebrainlabs/stalebrain/main/assets/demo.svg?v=2" alt="stale-brain audit: health bar, contradicted claims with cited commits, token meter, trend" width="840">
 </p>
 
 Verification is mechanical: glob, grep, and read-only git. No embeddings, no server, no database, no network. Nothing leaves your machine, and nothing gets executed: scripts are verified by their definition (scripts block, Makefile, CI), never by running them.
@@ -131,7 +131,7 @@ Health = (confirmed + 0.5 × stale) / (confirmed + stale + contradicted) × 100.
 The output system is a feature, not a byproduct. Reports follow CALM rules (chunked to 5 findings per block, verdict first, zero narration) rendered with Pulse graph primitives: a live tail that streams audit progress, and terminal graphs for health, token cost, and trend. All of it is plain Unicode with a complete ASCII fallback, built from scratch, zero dependencies. Full spec in [references/output-format.md](references/output-format.md). Each audit is recorded in `.stale-brain/audit-YYYY-MM-DD.md`, which feeds the trend graph on the next run.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/stalebrainlabs/stalebrain/main/assets/pulse.svg" alt="Pulse: the live tail, the graphs, the trend" width="840">
+  <img src="https://raw.githubusercontent.com/stalebrainlabs/stalebrain/main/assets/pulse.svg?v=2" alt="Pulse: the live tail, the graphs, the trend" width="840">
 </p>
 
 ## How it compares
