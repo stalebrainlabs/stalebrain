@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 440" role="img" aria-label="Pulse: the live tail, the graphs, the trend">
+  <rect width="880" height="440" rx="16" fill="#F8F1E3"/>
+
+  <g font-family="'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif" font-size="12" font-weight="700" fill="#E63A0C" letter-spacing="2.5">
+    <text x="32" y="44">THE LIVE TAIL</text>
+    <text x="32" y="168">THE GRAPHS</text>
+    <text x="32" y="292">THE TREND</text>
+  </g>
+
+  <!-- Band 1: ticker, the audit's tail -f -->
+  <g font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace" font-size="14" xml:space="preserve">
+    <text x="32" y="74"><tspan fill="#E63A0C">[stale-brain]</tspan><tspan fill="#5C5142"> inventory · 7 files (4 always-loaded ~4.8k + 3 on-demand ~2.2k)</tspan></text>
+    <text x="32" y="98"><tspan fill="#E63A0C">[stale-brain]</tspan><tspan fill="#5C5142"> verifying 20/39 · </tspan><tspan fill="#C42B08">&#9679;6</tspan><tspan fill="#5C5142"> </tspan><tspan fill="#D9930D">&#9679;4</tspan><tspan fill="#5C5142"> </tspan><tspan fill="#A79B87">&#9679;2</tspan><tspan fill="#5C5142"> </tspan><tspan fill="#2F9E44">&#9679;8</tspan></text>
+    <text x="32" y="122"><tspan fill="#E63A0C">[stale-brain]</tspan><tspan fill="#5C5142"> verifying 39/39 · </tspan><tspan fill="#C42B08">&#9679;13</tspan><tspan fill="#5C5142"> </tspan><tspan fill="#D9930D">&#9679;10</tspan><tspan fill="#5C5142"> </tspan><tspan fill="#A79B87">&#9679;4</tspan><tspan fill="#5C5142"> </tspan><tspan fill="#2F9E44">&#9679;12</tspan></text>
+  </g>
+
+  <!-- Band 2: health bar + token meter -->
+  <g>
+    <rect x="32"  y="186" width="42" height="20" rx="6" fill="#C42B08"/>
+    <rect x="80"  y="186" width="42" height="20" rx="6" fill="#C42B08"/>
+    <rect x="128" y="186" width="42" height="20" rx="6" fill="#C42B08"/>
+    <rect x="176" y="186" width="42" height="20" rx="6" fill="#D9930D"/>
+    <rect x="224" y="186" width="42" height="20" rx="6" fill="#D9930D"/>
+    <rect x="272" y="186" width="42" height="20" rx="6" fill="#2F9E44"/>
+    <rect x="320" y="186" width="42" height="20" rx="6" fill="#2F9E44"/>
+    <rect x="368" y="186" width="42" height="20" rx="6" fill="#2F9E44"/>
+    <rect x="416" y="186" width="42" height="20" rx="6" fill="#2F9E44"/>
+    <rect x="464" y="186" width="42" height="20" rx="6" fill="#2F9E44"/>
+    <text x="526" y="202" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="16" font-weight="700" fill="#33291F">health 58/100</text>
+  </g>
+  <g font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace" font-size="14" xml:space="preserve">
+    <text x="32" y="238"><tspan fill="#5C5142">misleading  </tspan><tspan fill="#D9930D">&#9619;&#9619;&#9619;</tspan><tspan fill="#CBBFA9">&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;</tspan><tspan fill="#33291F">  ~1.4k of 4.8k always-loaded tokens (29%) carry stale or false claims</tspan></text>
+  </g>
+
+  <!-- Band 3: trend across audits -->
+  <g font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace" font-size="14">
+    <text x="32" y="322" fill="#5C5142">2026-05-02</text>
+    <rect x="150" y="308" width="123" height="16" rx="5" fill="#E63A0C" opacity="0.45"/>
+    <text x="286" y="322" fill="#5C5142">health 41</text>
+
+    <text x="32" y="352" fill="#5C5142">2026-06-18</text>
+    <rect x="150" y="338" width="165" height="16" rx="5" fill="#E63A0C" opacity="0.7"/>
+    <text x="328" y="352" fill="#5C5142">health 55</text>
+
+    <text x="32" y="382" fill="#5C5142">2026-07-31</text>
+    <rect x="150" y="368" width="174" height="16" rx="5" fill="#2F9E44"/>
+    <text x="337" y="382" fill="#33291F" font-weight="700">health 58  <tspan fill="#2F9E44">&#9650; +3</tspan></text>
+  </g>
+
+  <text x="32" y="420" font-family="'Helvetica Neue', Helvetica, Arial, 'Segoe UI', sans-serif" font-size="13" fill="#A79B87">plain Unicode · zero dependencies · ASCII fallback · spec in references/output-format.md</text>
+</svg>

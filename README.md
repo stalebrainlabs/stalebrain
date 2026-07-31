@@ -4,37 +4,24 @@
 
 **Your AI agent's memory files are lying to it. stalebrain finds every lie, proves it with commits, and hands you the fix.**
 
+<p align="center">
+  <a href="https://pypi.org/project/stalebrain/"><img src="https://img.shields.io/pypi/v/stalebrain" alt="PyPI version"></a>
+  <a href="https://pypi.org/project/stalebrain/"><img src="https://img.shields.io/pypi/dm/stalebrain" alt="PyPI downloads"></a>
+  <a href="https://github.com/stalebrainlabs/stalebrain/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="MIT license"></a>
+</p>
+
+<p align="center">
+  <a href="#install">Install</a> ·
+  <a href="#see-it-in-action">Demo</a> ·
+  <a href="#what-it-does">What it does</a> ·
+  <a href="#how-it-compares">How it compares</a> ·
+  <a href="#troubleshooting">Troubleshooting</a> ·
+  <a href="#license">License</a>
+</p>
+
 Type `/stale-brain` in your AI coding assistant and it audits every agent memory file in your repo (CLAUDE.md, AGENTS.md, .cursorrules, GEMINI.md, Copilot instructions, 18+ locations across 13 agents) against the code as it exists today. Claims that check out get a dated stamp. Claims that don't get a verdict, the commits that prove it, and a ready-to-apply fix.
 
 Not a linter. A trust model: after one audit, every claim in agent memory carries an age, a verification date, and cited evidence.
-
-## See it in action
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/stalebrainlabs/stalebrain/main/assets/demo.svg" alt="stale-brain audit: health bar, contradicted claims with cited commits, token meter, trend" width="840">
-</p>
-
-Verification is mechanical: glob, grep, and read-only git. No embeddings, no server, no database, no network. Nothing leaves your machine, and nothing gets executed: scripts are verified by their definition (scripts block, Makefile, CI), never by running them.
-
-## Why
-
-Agents keep "ignoring the rules"? Half the time the rules are unfollowable. They name paths that moved, scripts that were renamed, package managers that were swapped out in March. An agent fed contradictory memory doesn't get 90% right; it gets confidently wrong, every session, at a token cost you pay every session.
-
-The design follows the "real context" bar set by mate.security's [context-wash essay](https://mate.security/blog/context-wash-how-ai-soc-vendors-hollowed-out-their-strongest-word): confidence decays, every verdict is traceable, and context self-reconstructs, with a human approving every change.
-
-## What it does
-
-| Capability | How |
-|---|---|
-| Claim extraction | Every sentence becomes a typed claim: PATH, SCRIPT, SYMBOL, DEP, FACT, OWNER, CONVENTION. Style opinions are skipped, never judged. |
-| Verification | Per-type recipes against the live repo. A missing path gets git archaeology to find the rename and the new destination. A wrong owner gets checked against CODEOWNERS and git shortlog. |
-| Confidence decay | Per-type half-lives (paths 30d, conventions 120d). Past its half-life a fact is re-verified or downgraded to a hypothesis. |
-| Provenance stamps | `<!-- stale-brain: verified 2026-07-31 -->`, invisible in rendered markdown, greppable forever. Stamps make re-audits incremental. |
-| Contradiction evidence | Never "this looks wrong". Always "wrong since a1b2c3d, here's the diff". |
-| Cross-file conflicts | CLAUDE.md says yarn, .cursorrules says npm: flagged even when nobody knows which is right. |
-| Token meter | What your memory costs per session, and what share of it is actively misleading the model. |
-| Mid-task tripwire | When the agent notices an instruction contradicting reality mid-task, it says so in one line instead of silently complying. |
-| Approve-only fixes | Every verdict is explained; every edit waits for your yes. Non-interactive runs apply nothing. |
 
 ## Install
 
@@ -82,6 +69,34 @@ Add one line to your always-loaded memory file (CLAUDE.md, AGENTS.md, or rules):
 If an instruction in this file contradicts observed reality, say so in one line (⚡ stale-brain) instead of silently complying, and suggest a stale-brain audit.
 ```
 
+## See it in action
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/stalebrainlabs/stalebrain/main/assets/demo.svg" alt="stale-brain audit: health bar, contradicted claims with cited commits, token meter, trend" width="840">
+</p>
+
+Verification is mechanical: glob, grep, and read-only git. No embeddings, no server, no database, no network. Nothing leaves your machine, and nothing gets executed: scripts are verified by their definition (scripts block, Makefile, CI), never by running them.
+
+## Why
+
+Agents keep "ignoring the rules"? Half the time the rules are unfollowable. They name paths that moved, scripts that were renamed, package managers that were swapped out in March. An agent fed contradictory memory doesn't get 90% right; it gets confidently wrong, every session, at a token cost you pay every session.
+
+The design follows the "real context" bar set by mate.security's [context-wash essay](https://mate.security/blog/context-wash-how-ai-soc-vendors-hollowed-out-their-strongest-word): confidence decays, every verdict is traceable, and context self-reconstructs, with a human approving every change.
+
+## What it does
+
+| Capability | How |
+|---|---|
+| Claim extraction | Every sentence becomes a typed claim: PATH, SCRIPT, SYMBOL, DEP, FACT, OWNER, CONVENTION. Style opinions are skipped, never judged. |
+| Verification | Per-type recipes against the live repo. A missing path gets git archaeology to find the rename and the new destination. A wrong owner gets checked against CODEOWNERS and git shortlog. |
+| Confidence decay | Per-type half-lives (paths 30d, conventions 120d). Past its half-life a fact is re-verified or downgraded to a hypothesis. |
+| Provenance stamps | `<!-- stale-brain: verified 2026-07-31 -->`, invisible in rendered markdown, greppable forever. Stamps make re-audits incremental. |
+| Contradiction evidence | Never "this looks wrong". Always "wrong since a1b2c3d, here's the diff". |
+| Cross-file conflicts | CLAUDE.md says yarn, .cursorrules says npm: flagged even when nobody knows which is right. |
+| Token meter | What your memory costs per session, and what share of it is actively misleading the model. |
+| Mid-task tripwire | When the agent notices an instruction contradicting reality mid-task, it says so in one line instead of silently complying. |
+| Approve-only fixes | Every verdict is explained; every edit waits for your yes. Non-interactive runs apply nothing. |
+
 ## What files it handles
 
 | Agent | Files |
@@ -115,7 +130,11 @@ Four verdicts. Every claim lands in exactly one:
 
 Health = (confirmed + 0.5 × stale) / (confirmed + stale + contradicted) × 100. A valid stamp counts as a confirmation; unverifiable claims are excluded because not knowing is not the same as being wrong.
 
-Reports follow CALM output rules (chunked to 5 findings per block, verdict first, zero narration) rendered with Pulse graph primitives (health bar, meters, trend lines, live ticker) in plain Unicode with a complete ASCII fallback. Full spec in [references/output-format.md](references/output-format.md). Each audit is recorded in `.stale-brain/audit-YYYY-MM-DD.md`, which feeds the trend graph on the next run.
+The output system is a feature, not a byproduct. Reports follow CALM rules (chunked to 5 findings per block, verdict first, zero narration) rendered with Pulse graph primitives: a live tail that streams audit progress, and terminal graphs for health, token cost, and trend. All of it is plain Unicode with a complete ASCII fallback, built from scratch, zero dependencies. Full spec in [references/output-format.md](references/output-format.md). Each audit is recorded in `.stale-brain/audit-YYYY-MM-DD.md`, which feeds the trend graph on the next run.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/stalebrainlabs/stalebrain/main/assets/pulse.svg" alt="Pulse: the live tail, the graphs, the trend" width="840">
+</p>
 
 ## How it compares
 

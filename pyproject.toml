@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "stalebrain"
-version = "0.1.1"
+version = "0.1.2"
 description = "Provenance and decay for AI agent memory: audit CLAUDE.md, AGENTS.md, .cursorrules and 18+ agent memory files against the live repo."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -38,3 +38,4 @@ packages = ["src/stalebrain"]
 "references/output-format.md" = "stalebrain/assets/references/output-format.md"
 "assets/hero.svg" = "stalebrain/art/hero.svg"
 "assets/demo.svg" = "stalebrain/art/demo.svg"
+"assets/pulse.svg" = "stalebrain/art/pulse.svg"
